@@ -1,0 +1,61 @@
+{
+  "name": "koa",
+  "version": "1.0.0",
+  "description": "Koa2 puppetter mongo",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "build_dll": "webpack --config webpack.config.dll.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marspal/Koa.git"
+  },
+  "keywords": [
+    "koa",
+    "mongo"
+  ],
+  "author": "andyxu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marspal/Koa/issues"
+  },
+  "homepage": "https://github.com/marspal/Koa#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "antd": "^3.21.2",
+    "autoprefixer": "^9.6.1",
+    "axios": "^0.19.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.12.0",
+    "css-loader": "^3.2.0",
+    "expose-loader": "^0.7.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.10",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.39.1",
+    "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "react-router-dom": "^5.0.1"
+  }
+}

@@ -1,0 +1,20 @@
+apps:
+  - script: ./server/index.js
+    name: 'Koa2'
+    env:
+      COMMON_VARIABLE: true
+    env_production:
+      NODE_ENV: production
+deploy:
+  production:
+    user: root               
+    host: 212.129.146.21          
+    port: 22
+    ref: origin/master            
+    ssh_options: StrictHostKeyChecking=no
+    repo: git@github.com:marspal/Koa2.git
+    path: /www
+    pre-deploy: git fetch --all
+    post-deploy: npm install && pm2 reload deploy.yaml --env production
+    env: 
+      NODE_ENV: production

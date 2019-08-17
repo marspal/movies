@@ -1,0 +1,103 @@
+extends ./layouts/default
+
+block title
+  title 豆瓣
+
+block content
+  style.
+    header{
+      background: #563d7c;
+    }
+    @media(min-width: 768px){
+      .sidebar {
+        position: sticky;
+        position: -webkit-sticky;
+        top: 4rem;
+        z-index: 1000;
+        height: calc(100vh - 4rem);
+        border-right: 1px solid #ddd
+      }
+    }
+    .sidebar .nav > li >a {
+      display: block;
+      padding: .25rem 1.5rem;
+      font-size: 90%;
+      color: rgba(0,0,0,.65);
+    }
+    .bd-toc-item.active > .bd-sidenav{
+      display: block;
+    }
+    .bd-sidenav {
+      display: none;
+    }
+    .bd-toc-item .nav {
+      display: block;
+    }
+  include ./layouts/header
+  .container-fluid
+    .row
+      .col-12.col-md-3.col-xl-2.sidebar
+        .bd-links
+          .bd-toc-item.active
+            a.bd-toc-link(href="/") Links
+            ul.nav.bd-sidenav
+              li.list-item.active.bd-sidenav-active
+                a Link1
+              li.list-item
+                a Link2
+      .col-12.col-md-9.col-xl-8.py-md-3.pl-md-5.content
+        .row
+          .col-md-6
+            .card
+              img.card-img-top(src="http://seopic.699pic.com/photo/50035/0520.jpg_wh1200.jpg",
+              data-video="http://www.runoob.com/try/demo_source/mov_bbb.mp4")
+              .card-body
+                h5.card-title 这是电影标题
+                p.card-desc 这是电影频道
+              .card-footer
+                small.text-muted 1 天前更新
+          .col-md-6
+            .card
+              img.card-img-top(src="http://seopic.699pic.com/photo/50035/0520.jpg_wh1200.jpg",
+              data-video="http://www.runoob.com/try/demo_source/mov_bbb.mp4")
+              .card-body
+                h5.card-title 这是电影标题
+                p.card-desc 这是电影频道
+              .card-footer
+                small.text-muted 1 天前更
+  #myModal.modal.fade(tabindex="-1", role="dialog",aria-labelledby="exampleModalLabel",aria-hidden="true" )
+    .modal-dialog.modal-lg
+    #videoModal.modal-content
+  include ./includes/script
+  script.
+    var player = null;
+    $(function(){
+      $("#myModal").on("hidden.bs.modal", function(){
+        if(player && player.pause) player.pause()
+      })
+      $('.card-img-top').click(function(e){
+        var video = $(this).data("video")
+        var image = $(this).attr("src")
+        $("#myModal").modal('show')
+        if(!player){
+          player = new DPlayer({
+            container: document.getElementById('videoModal'),
+            screenshot: true,
+            video: {
+              url: video,
+              pic: image,
+              thumbnails: image
+            }
+          })
+        } else {
+          if(player.video.currentSrc !== video){
+            player.switchVideo({
+                url: video,
+                pic: image,
+                type: 'auto'
+              })
+            }
+          }
+      })
+    })
+

@@ -1,0 +1,129 @@
+#root 
+  width: 100%
+  height: 100%
+  overflow: hidden
+
+.flex-row
+  display: flex
+  align-items: center
+
+.flex-column
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+
+.flex-1
+  flex: 1
+
+.align-self-start
+  align-self: flex-start
+
+.scroll-y
+  height: 100%
+  overflow-x: hidden
+  overflow-y: scroll
+
+.full
+  width: 100%
+  height: 100%
+
+.content-spin
+  overflow: hidden
+  > *
+    width: 100% !important
+    height: 100% !important
+    overflow: hidden !important
+.page-shade 
+  background: black
+  .video-wrapper
+    position: fixed
+    top: 0
+    color: #fff
+    font-family: Arial, sans-serif
+    font-size: 14px
+    height: 100%
+    width: calc(100% - 320px)
+    #videoPlayer
+      width: 100%
+      height: 100%
+
+  .video-sidebar
+    position: absolute
+    top: 0
+    right: 0
+    background: #fff
+    width: 320px
+    padding: 20px
+    height: 100%
+    z-index: 2001
+    .home-link 
+      display: block
+      text-align: center
+      font-size: 1.25rem
+      color: #555
+      font-weight: bolder
+    .about-movie 
+      >dt
+        font-family: Arial, sans-serif
+        font-size: 14px
+        font-weight: bolder
+      .ant-tag 
+        margin-bottom: 8px
+
+.nav-wrapper 
+  font-size: 13.5
+  background: #000 !important
+  a  
+    color: #fff2e8 !important
+
+.media
+  margin-bottom: 8px
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  -webkit-box-align: start
+  -ms-flex-align: start
+  align-items: flex-start
+  height: 86px
+  border: 1px solid #eee
+  overflow: hidden
+  img
+    vertical-align: middle
+    border-style: none
+    margin-right: 10px
+  .media-body
+    height: 100%
+    flex: 1
+    color: #555
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    .media-title
+      font-size: 10px
+      font-weight: bolder
+    .media-update 
+      font-size: 10px
+.movie-description
+  height: 202px
+  overflow: hidden             
+
+::-webkit-scrollbar
+  width: 5px
+
+/* 滚动槽 */
+::-webkit-scrollbar-track 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+  border-radius: 10px
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb 
+  border-radius: 5px
+  background: rgba(189,189,189,0.1)
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5)
+
+::-webkit-scrollbar-thumb:window-inactive 
+  background: rgba(225,225,225,0.2)
+
+
+
