@@ -48,3 +48,10 @@ HTTP请求  Nginx  静态资源location         dist/html js css
   - pm2 deploy deploy.yaml production setup  首次部署
   - pm2 deploy deploy.yaml production  再次部署  进入nginx 启动
 
+
+
+##### 下阶段任务: 
+1. 定时任务
+2. 首页功能完善
+3. 后端api完善
+
