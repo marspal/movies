@@ -41,4 +41,7 @@ HTTP请求  Nginx  静态资源location         dist/html js css
     /usr/local/webserver/nginx/conf
     ```
 
-- 配置发布脚本 deploy.yaml
+- 配置发布脚本 [deploy](./deploy.yaml)
+
+- 配置ssh id_rsa github , 安装git: apt-get install git, 按照deploy.yaml 创/www 容器
+
