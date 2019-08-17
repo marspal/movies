@@ -46,5 +46,5 @@ HTTP请求  Nginx  静态资源location         dist/html js css
 - 配置ssh id_rsa github , 安装git: apt-get install git, 按照deploy.yaml 创/www 容器
 
   - pm2 deploy deploy.yaml production setup  首次部署
-  - pm2 deploy deploy.yaml production update  再次部署
+  - pm2 deploy deploy.yaml production  再次部署
 
