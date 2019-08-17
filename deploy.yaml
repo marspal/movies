@@ -1,5 +1,5 @@
 apps:
-  - script: ./server/start.js
+  - script: ./server/src/index.js
     name: 'movies'
     env:
       COMMON_VARIABLE: true # 自定义变量
