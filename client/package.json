@@ -1,7 +1,7 @@
 {
-  "name": "koa",
+  "name": "client",
   "version": "1.0.0",
-  "description": "Koa2 puppetter mongo",
+  "description": "webpack4.0 react antd",
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js",
@@ -13,8 +13,9 @@
     "url": "git+https://github.com/marspal/Koa.git"
   },
   "keywords": [
-    "koa",
-    "mongo"
+    "webpack4.0",
+    "react",
+    "antd"
   ],
   "author": "andyxu",
   "license": "ISC",

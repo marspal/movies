@@ -1,11 +1,5 @@
 # Koa2
 
-## 架构图
-
-<p align="center">
-  <img src="server.png"/>
-</p>
-
 ## 基础知识
 
 > 运算符 + 的implicit type conversion规则：
