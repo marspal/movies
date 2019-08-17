@@ -37,9 +37,9 @@ export default class Moive extends React.Component {
     request({
       method: 'get',
       url: parseUrl(`/api/v0/movies/${this.state._id}`)
-    }).then(res => {
-      const movie = res.movie
-      const relativeMovies = res.relativeMovies
+    }).then(({data}) => {
+      const movie = data.movie
+      const relativeMovies = data.relativeMovies
       const video = site + movie.videoKey;
       const thumb = site + movie.coverKey;
       this.setState({
