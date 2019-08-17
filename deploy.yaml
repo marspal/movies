@@ -15,6 +15,6 @@ deploy:   # 部署脚本
     repo: git@github.com:marspal/movies.git # 远程仓库地址
     path: /www  # 拉取到服务器某个目录
     pre-deploy: git fetch --all # 部署前执行
-    post-deploy: npm install && pm2 startOrRestart deploy.yaml --env production # 部署后执行
+    post-deploy: cd ./server && npm install && pm2 startOrRestart deploy.yaml --env production # 部署后执行
     env: 
       NODE_ENV: production
