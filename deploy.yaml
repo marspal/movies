@@ -1,0 +1,20 @@
+apps:
+  - script: ./server/start.js
+    name: 'movies'
+    env:
+      COMMON_VARIABLE: true # 自定义变量
+    env_production:
+      NODE_ENV: production
+deploy:   # 部署脚本
+  production: # 生产环境
+    user: root               
+    host: 212.129.146.21          
+    port: 22
+    ref: origin/master            
+    ssh_options: StrictHostKeyChecking=no # SSH 公钥检查
+    repo: git@github.com:marspal/movies.git # 远程仓库地址
+    path: /www  # 拉取到服务器某个目录
+    pre-deploy: git fetch --all # 部署前执行
+    post-deploy: npm install && pm2 startOrRestart deploy.yaml --env production # 部署后执行
+    env: 
+      NODE_ENV: production
