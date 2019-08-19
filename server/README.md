@@ -540,7 +540,91 @@ module.exports = {
 - pm2 deploy deploy.yaml production setup
 
 
+## [event log](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
+
+> [libuv](https://github.com/libuv/libuv) T 选择 src/unix/core.c uv_run
+
+```
+int uv_run(uv_loop_t* loop, uv_run_mode mode) {
+  int timeout;
+  int r;
+  int ran_pending;
+
+  r = uv__loop_alive(loop);
+  if (!r)
+    uv__update_time(loop);
+
+  while (r != 0 && loop->stop_flag == 0) {
+    uv__update_time(loop);
+    uv__run_timers(loop);
+    ran_pending = uv__run_pending(loop);
+    uv__run_idle(loop);
+    uv__run_prepare(loop);
+
+    timeout = 0;
+    if ((mode == UV_RUN_ONCE && !ran_pending) || mode == UV_RUN_DEFAULT)
+      timeout = uv_backend_timeout(loop);
+
+    uv__io_poll(loop, timeout);
+    uv__run_check(loop);
+    uv__run_closing_handles(loop);
+
+    if (mode == UV_RUN_ONCE) {
+    
+      uv__update_time(loop);
+      uv__run_timers(loop);
+    }
+
+    r = uv__loop_alive(loop);
+    if (mode == UV_RUN_ONCE || mode == UV_RUN_NOWAIT)
+      break;
+  }
+
+  if (loop->stop_flag != 0)
+    loop->stop_flag = 0;
+
+  return r;
+}
+```
+
+```
+  // 八个函数看成8个头尾相连的阶段, 串联起来组成整个事件循环的过程
+  uv__update_time(loop);  
+  uv__run_timers(loop); // timers
+  uv__run_pending(loop); // pending callback: tcp utp 
+  uv__run_idle(loop);  // idle, pre
+  uv__run_prepare(loop);
+  uv__io_poll(loop, timeout); // poll 获取新的io事件, 执行io回调, 处理定时器到期的回调, 处理poll队列中的回调, 直到poll回调被情况或达到处理上线, 如果队列不为空的话, 如果遇见setImmediate
+  那就终止poll 去执行check阶段, 如果没有setImmediate node.js 就去查看有没有定时任务到期, 有就timers阶段
+  uv__run_check(loop); // check 执行immediate回调 只能在check 执行, 每一个阶段都是先进先出的队列
+  uv__run_closing_handles(loop);
+  
+
+```
+
+<p align="center">
+  <img src="./event_loop.png"/>
+</p>
+
+process.nextTick() 任意回调中间 执行
+
+
+> poll phase
+The poll phase has two main functions:
+
+1. Calculating how long it should block and poll for I/O, then
+2. Processing events in the poll queue.
+
+When the event loop enters the poll phase and there are no timers scheduled, one of two things will happen:
+
+- If the poll queue is not empty, the event loop will iterate through its queue of callbacks executing them synchronously until either the queue has been exhausted, or the system-dependent hard limit is reached.
+
+- If the poll queue is empty, one of two more things will happen:
+  
+  - If scripts have been scheduled by setImmediate(), the event loop will end the poll phase and continue to the check phase to execute those scheduled scripts
+
+  - If scripts have not been scheduled by setImmediate(), the event loop will wait for callbacks to be added to the queue, then execute them immediately.
 
 
 
-
+Once the poll queue is empty the event loop will check for timers whose time thresholds have been reached. If one or more timers are ready, the event loop will wrap back to the timers phase to execute those timers' callbacks.
