@@ -18,7 +18,9 @@ function someAsyncApiCall(callback) { callback(); }
 // the callback is called before `someAsyncApiCall` completes.
 someAsyncApiCall(() => {
   // since someAsyncApiCall has completed, bar hasn't been assigned any value
-  console.log('bar', bar); // undefined
+  setTimeout(()=>{
+    console.log('bar', bar); // undefined
+  },0)
 });
 
 bar = 1;
@@ -27,6 +29,7 @@ let bar;
 
 function someAsyncApiCall(callback) {
   process.nextTick(callback);
+  // callback()
 }
 
 someAsyncApiCall(() => {
