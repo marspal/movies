@@ -311,11 +311,15 @@ console.log(found);
 
 > Koa核心对象
 
-Koa vs Express
+Koa vs Express (Nodejs  web服务框架)
 
 ========================
 
-HTTP 接收 解析 响应(核心能力)
+核心服务: HTTP 接收 解析 响应
+
+响应方式: html页面、json文本
+
+解析和响应之间有中间件 如日志、表单解析等
 
 中间件(增强Koa的服务能力)  执行上下文(串联 托管请求、响应、中间件),方便他们之间相互访问;
 
