@@ -68,6 +68,16 @@ export default class Content extends Component{
   }
   _renderContent = () => {
     const { movies } = this.props;
+    if(!movies.length){
+      return <div 
+        style={{
+          textAlign: 'center', 
+          fontWeight: 'bolder', 
+          marginTop: '100px'
+        }}>
+          暂无电影信息
+        </div>
+    }
     return <div>
       <Row gutter={8} justify="space-around">
         { movies.map((it, i) => (

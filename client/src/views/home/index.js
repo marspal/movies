@@ -8,7 +8,7 @@ export default class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      years: ['2025','2024','2023','2022', '2021', '2020', '2019'],
+      years: ['all','2016','2017','2018','2019', '2020', '2021', '2022'],
       type: this.props.match.params.type,
       year: this.props.match.params.year,
       movies: []
@@ -32,22 +32,23 @@ export default class Home extends Component {
     });
   }
   _selectItem = ({key}) => {
-    this.setState({selectedKey: key})
+    this.setState({year: key},()=>{
+      this._getAllMoives()
+    })
   }
   _renderContent(){
     const {movies} = this.state;
-    if(!movies.length) return null;
     return <Content movies={movies}/>
   }
   render(){
-    let {years, selectedKey, type} = this.state
+    let {years, year, type} = this.state
     console.log(type)
-    selectedKey = selectedKey || years[0]
+    year = year || years[0]
     return <Layout {...this.props}>
       <div className="flex-row full">
         <Menu
             mode="inline"
-            defaultSelectedKeys={[selectedKey]}
+            defaultSelectedKeys={[year]}
             onSelect={this._selectItem}
             style={{
               width: "200px",
@@ -57,7 +58,7 @@ export default class Home extends Component {
             {
               years.map((year) => (
                 <Menu.Item key={year}>
-                  {year} 年上映
+                  {year == 'all'? '所有年份': `${year} 年上映`}
                 </Menu.Item>
               ))
             }

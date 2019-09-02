@@ -8,7 +8,7 @@ export const getAllMovies = async (type, year) => {
       $in: [type]
     }
   }
-  if(year){
+  if(year && year !== 'all'){ // year 为all 查询所有 
     query.year = year;
   }
 
