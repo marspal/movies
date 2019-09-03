@@ -10,8 +10,16 @@ export default class Home extends Component {
     this.state = {
       years: ['all','2016','2017','2018','2019', '2020', '2021', '2022'],
       type: this.props.match.params.type,
-      year: this.props.match.params.year,
+      year: this.props.match.params.year || 'all',
       movies: []
+    }
+  }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps.match.params.type,this.state.type)
+    if(nextProps.match.params.type !== this.state.type){
+      this.setState({type: nextProps.match.params.type},()=>{
+        this._getAllMoives();
+      })
     }
   }
   componentDidMount(){
@@ -41,9 +49,7 @@ export default class Home extends Component {
     return <Content movies={movies}/>
   }
   render(){
-    let {years, year, type} = this.state
-    console.log(type)
-    year = year || years[0]
+    let {years, year} = this.state
     return <Layout {...this.props}>
       <div className="flex-row full">
         <Menu
@@ -58,7 +64,7 @@ export default class Home extends Component {
             {
               years.map((year) => (
                 <Menu.Item key={year}>
-                  {year == 'all'? '所有年份': `${year} 年上映`}
+                  {year == 'all'? '全部': `${year} 年上映`}
                 </Menu.Item>
               ))
             }

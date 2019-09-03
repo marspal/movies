@@ -6,6 +6,11 @@ export default [{
   exact: true,
   component: AC(() => import("./views/home"))
 },{
+  name: '类型页',
+  path: '/list/:type',
+  exact: true,
+  component: AC(() => import("./views/home"))
+},{
   name: '详情页',
   path: '/detail/:id',
   exact: true,

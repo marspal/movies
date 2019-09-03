@@ -7,7 +7,7 @@ import navRoutes from  '../navRoutes';
 import {Link} from 'react-router-dom';
 
 const getMenuContent = ({name,path}) => (
-  <a href={path?path : '/'}>{name}</a>
+  <Link to={path?path : '/'}>{name}</Link>
 );
 export default class Layout extends Component {
   constructor(props){
@@ -38,7 +38,7 @@ export default class Layout extends Component {
   }
   render(){
     const {children} = this.props;
-    console.log(this.props.match, '===')
+    console.log(this.props.match, this.matchRouteName,'===')
     const {loading, tip} = this.state;
     return (
       <div className="flex-column full">
