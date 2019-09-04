@@ -10,6 +10,7 @@ import {
   Spin
 } from 'antd';
 import moment from 'moment';
+import LazyLoad from 'react-lazyload';
 import {site} from '../../config/index.js';
 moment.locale('zh-cn')
 
@@ -85,42 +86,43 @@ export default class Content extends Component{
             key={i}
             span={6}
             style={{marginBottom: '10px'}}
-          >
-            <Card 
-              bordered={true}
-              hoverable
-              style={{width: '100%'}}
-              actions={[
-                <Badge>
-                  <Icon style={{marginRight: '2px'}} type="clock-circle"/>
-                  {moment(it.meta.createdAt).fromNow(true)}
-                  前更新
-                </Badge>,
-                <Badge>
-                  <Icon style={{marginRight: '2px'}} type='star'/>
-                  {it.rate} 分
-                </Badge>
-              ]}
-              cover={
-                <img 
-                  onClick={() => this._showModal(it)}
-                  src={
-                    site + 
-                    it.posterKey +
-                    '?imageMogr2/thumbnail/x1680/crop/1080x1680'
+          > <LazyLoad>
+              <Card 
+                bordered={true}
+                hoverable
+                style={{width: '100%'}}
+                actions={[
+                  <Badge>
+                    <Icon style={{marginRight: '2px'}} type="clock-circle"/>
+                    {moment(it.meta.createdAt).fromNow(true)}
+                    前更新
+                  </Badge>,
+                  <Badge>
+                    <Icon style={{marginRight: '2px'}} type='star'/>
+                    {it.rate} 分
+                  </Badge>
+                ]}
+                cover={
+                  <img 
+                    onClick={() => this._showModal(it)}
+                    src={
+                      site + 
+                      it.posterKey +
+                      '?imageMogr2/thumbnail/x1680/crop/1080x1680'
+                    }
+                  />
+                }
+              >
+                <Meta
+                  className="movie-description"
+                  title={<Link to={`/detail/${it._id}`}>{it.title}</Link>}
+                  onClick={this._jumpToDetail}
+                  description={
+                    <Link to={`/detail/${it._id}`}>{it.summary}</Link>
                   }
                 />
-              }
-            >
-              <Meta
-                className="movie-description"
-                title={<Link to={`/detail/${it._id}`}>{it.title}</Link>}
-                onClick={this._jumpToDetail}
-                description={
-                  <Link to={`/detail/${it._id}`}>{it.summary}</Link>
-                }
-              />
-            </Card>
+              </Card>
+            </LazyLoad>
           </Col>
         ))}
       </Row>
